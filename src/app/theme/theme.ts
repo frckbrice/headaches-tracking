@@ -5,7 +5,7 @@ export const darkTheme = createTheme({
   palette: {
     mode: "dark",
     primary: {
-      main: "#333",
+      main: "#1F6FFF",
     },
   },
 });
@@ -14,7 +14,8 @@ export const lightTheme = createTheme({
   palette: {
     mode: "light",
     primary: {
-      main: "#F1F1FF",
+      main: "#1F6FFF",
+      // second: "#F1F1F1",
     },
   },
 });

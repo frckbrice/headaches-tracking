@@ -1,14 +1,23 @@
 "use client ";
 
 import * as React from "react";
-import { Avatar, Grid, Button, Switch, FormControlLabel } from "@mui/material";
+import { Avatar, Grid, Switch, FormControlLabel } from "@mui/material";
 import Logo from "./logo";
 import { usePathname, useRouter } from "next/navigation";
-import { Rowdies } from "next/font/google";
+import { useAuthContext } from "../context";
+import AvatarComponent from "./Avatar";
 
-export default function Header({ switchTheme }: { switchTheme: any }) {
+type Props = {
+  switchTheme: any;
+  label: string;
+  user?: any;
+};
+
+export default function Header({ switchTheme, label, user }: Props) {
   const pathName = usePathname();
-  const router = useRouter();
+  // const router = useRouter();
+
+  // const { user } = useAuthContext();
 
   return (
     <Grid sx={{ p: 2 }}>
@@ -23,25 +32,34 @@ export default function Header({ switchTheme }: { switchTheme: any }) {
         </Grid>
         <Grid
           xs={6}
+          item={true}
           rowSpacing={1}
-          container
           direction="row"
+          container
           alignItems="center"
           justifyContent="flex-end"
         >
-          <FormControlLabel
-            control={
-              <Switch onChange={switchTheme} name="gilard" color="primary" />
-            }
-            label="Night mode"
-          />
-          <Avatar
-            className="pointer"
-            onClick={() => router.push("/profile")}
-            sx={{ width: 56, height: 56, backgroundColor: "#1F6FFF" }}
-          >
-            H
-          </Avatar>
+          <p>{user?.email} </p>
+          {user && (
+            <Grid
+              direction="row"
+              container
+              alignItems="center"
+              justifyContent="flex-end"
+            >
+              <FormControlLabel
+                control={
+                  <Switch
+                    onChange={switchTheme}
+                    name="gilard"
+                    color="primary"
+                  />
+                }
+                label={`${label}`}
+              />
+              {/* <AvatarComponent user={user} /> */}
+            </Grid>
+          )}
         </Grid>
       </Grid>
     </Grid>
